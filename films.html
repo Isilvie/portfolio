@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Films</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ── Navigation ─────────────────────────────────── -->
+  <nav id="site-nav" class="solid">
+    <a class="nav-name" id="nav-name-link" href="index.html">YOUR NAME</a>
+
+    <ul class="nav-links" id="nav-links"></ul>
+
+    <button class="nav-hamburger" id="hamburger-btn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Overlay -->
+  <div class="nav-mobile-overlay" id="mobile-overlay"></div>
+
+  <!-- ── Films ──────────────────────────────────────── -->
+  <main class="page-content">
+    <div class="container">
+
+      <header class="page-header fade-in">
+        <p> Short Film Work</p>
+      </header>
+
+      <section class="films-list" id="films-list">
+        <!-- rendered by JS -->
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <span id="footer-name"></span>
+    <span id="footer-year"></span>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="data/config.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    renderNav();
+    document.title = 'Films — ' + CONFIG.name;
+    document.getElementById('footer-name').textContent = CONFIG.name;
+    document.getElementById('footer-year').textContent = '© ' + new Date().getFullYear();
+
+    /* ── Render films ── */
+    const list = document.getElementById('films-list');
+    CONFIG.films.forEach((film, i) => {
+      const item = document.createElement('article');
+      item.className = 'film-item fade-in';
+      item.style.transitionDelay = (i * 0.08) + 's';
+      item.innerHTML = `
+        <div class="film-embed">
+          <div class="vimeo-wrapper">
+            <iframe
+              src="https://player.vimeo.com/video/${film.vimeoId}?color=c8a96e&title=0&byline=0&portrait=0"
+              allow="autoplay; fullscreen; picture-in-picture; allowfullscreen"
+              title="${film.title}">
+            </iframe>
+          </div>
+        </div>
+        <div class="film-info">
+          <div class="film-meta">
+            <span>${film.year}</span>
+            <span>${film.duration}</span>
+          </div>
+          <h2>${film.title}</h2>
+          <div class="film-divider"></div>
+          <p>${film.synopsis}</p>
+        </div>
+      `;
+      list.appendChild(item);
+    });
+  </script>
+</body>
+</html>

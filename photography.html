@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photography</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ── Navigation ─────────────────────────────────── -->
+  <nav id="site-nav" class="solid">
+    <a class="nav-name" id="nav-name-link" href="index.html">YOUR NAME</a>
+
+    <ul class="nav-links" id="nav-links"></ul>
+
+    <button class="nav-hamburger" id="hamburger-btn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Overlay -->
+  <div class="nav-mobile-overlay" id="mobile-overlay"></div>
+
+  <!-- ── Photography ────────────────────────────────── -->
+  <main class="page-content">
+    <div class="container full-bleed">
+
+      
+      <div class="photo-grid" id="photo-grid">
+        <!-- rendered by JS -->
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-label="Image viewer">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <button class="lightbox-nav lightbox-prev" aria-label="Previous">&#8249;</button>
+    <img id="lb-img" src="" alt="" />
+    <p class="lightbox-caption" id="lb-caption"></p>
+    <button class="lightbox-nav lightbox-next" aria-label="Next">&#8250;</button>
+  </div>
+
+  <footer>
+    <span id="footer-name"></span>
+    <span id="footer-year"></span>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="data/config.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    renderNav();
+    document.title = 'Photography — ' + CONFIG.name;
+    document.getElementById('footer-name').textContent = CONFIG.name;
+    document.getElementById('footer-year').textContent = '© ' + new Date().getFullYear();
+
+    /* ── Render photo grid ── */
+    const grid = document.getElementById('photo-grid');
+    const photos = CONFIG.photography;
+    window.lbSetPhotos(photos);
+
+    photos.forEach((photo, i) => {
+      const item = document.createElement('div');
+      item.className = 'photo-item';
+      item.style.transitionDelay = (i * 0.06) + 's';
+      item.setAttribute('role', 'button');
+      item.setAttribute('tabindex', '0');
+      item.setAttribute('aria-label', 'View ' + photo.alt);
+      item.innerHTML = `<img src="${photo.src}" alt="${photo.alt}" loading="lazy" />`;
+
+      item.addEventListener('click', () => window.lbOpen(i));
+      item.addEventListener('keydown', e => { if (e.key === 'Enter') window.lbOpen(i); });
+
+      grid.appendChild(item);
+    });
+  </script>
+</body>
+</html>

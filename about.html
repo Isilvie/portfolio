@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ── Navigation ─────────────────────────────────── -->
+  <nav id="site-nav" class="solid">
+    <a class="nav-name" id="nav-name-link" href="index.html">YOUR NAME</a>
+
+    <ul class="nav-links" id="nav-links"></ul>
+
+    <button class="nav-hamburger" id="hamburger-btn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Overlay -->
+  <div class="nav-mobile-overlay" id="mobile-overlay"></div>
+
+  <!-- ── About ──────────────────────────────────────── -->
+  <main class="page-content">
+    <div class="container">
+
+      <header class="page-header fade-in">
+         <p id="about-tagline"></p>
+      </header>
+
+      <div class="about-grid">
+
+        <!-- ── Portrait column ── -->
+        <aside class="about-portrait fade-in">
+          <div id="portrait-wrap">
+            <!-- portrait injected by JS -->
+          </div>
+        </aside>
+
+        <!-- ── Info column ── -->
+        <section class="about-content">
+
+          <!-- Bio -->
+          <div class="about-bio fade-in">
+            <h2 id="about-name"></h2>
+            <div id="about-bio-text"></div>
+          </div>
+
+          <!-- Contact -->
+          <div class="fade-in">
+            <p class="about-section-title">Contact</p>
+            <ul class="contact-list" id="contact-list">
+              <!-- rendered by JS -->
+            </ul>
+          </div>
+
+          <!-- Resume -->
+          <div class="fade-in">
+            <p class="about-section-title">Resume / CV</p>
+            <a id="resume-btn" class="resume-btn" href="#" download>
+              <i class="fas fa-download"></i>
+              <span id="resume-label">Download CV</span>
+            </a>
+           </div>
+
+        </section>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <span id="footer-name"></span>
+    <span id="footer-year"></span>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="data/config.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    renderNav();
+    document.title = 'About — ' + CONFIG.name;
+    document.getElementById('footer-name').textContent = CONFIG.name;
+    document.getElementById('footer-year').textContent = '© ' + new Date().getFullYear();
+
+    const ab = CONFIG.about;
+
+    /* tagline */
+    document.getElementById('about-tagline').textContent = CONFIG.tagline;
+
+    /* name heading */
+    document.getElementById('about-name').textContent = CONFIG.name;
+
+    /* portrait */
+    const portraitWrap = document.getElementById('portrait-wrap');
+    if (ab.portrait) {
+      portraitWrap.innerHTML = `<img src="${ab.portrait}" alt="Portrait of ${CONFIG.name}" />`;
+    } else {
+      portraitWrap.innerHTML = `
+        <div class="about-portrait-placeholder">
+          <i class="fas fa-user" style="font-size:2rem; color:var(--border);"></i>
+          <span>Add portrait.jpg<br>to assets/</span>
+        </div>`;
+    }
+
+    /* bio */
+    const bioEl = document.getElementById('about-bio-text');
+    ab.bio.forEach(para => {
+      const p = document.createElement('p');
+      p.textContent = para;
+      bioEl.appendChild(p);
+    });
+
+    /* contact */
+    const contactList = document.getElementById('contact-list');
+    const contacts = [
+      { icon: 'fa-envelope',   href: 'mailto:' + ab.email,    label: ab.email,     show: ab.email },
+      { icon: 'fa-brands fa-instagram', href: ab.instagram,   label: '@' + (ab.instagram || '').split('/').pop(), show: ab.instagram },
+      { icon: 'fa-brands fa-vimeo-v',   href: ab.vimeo,       label: 'Vimeo',      show: ab.vimeo }
+    ];
+
+    contacts.filter(c => c.show).forEach(c => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <span class="contact-icon"><i class="fas ${c.icon}"></i></span>
+        <a href="${c.href}" target="_blank" rel="noopener noreferrer">${c.label}</a>
+      `;
+      contactList.appendChild(li);
+    });
+
+    /* resume */
+    const resumeBtn = document.getElementById('resume-btn');
+    resumeBtn.href = ab.resumeFile || 'assets/resume.pdf';
+    document.getElementById('resume-label').textContent = ab.resumeLabel || 'Download CV / Resume';
+  </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Home</title>
+  <meta name="description" content="Filmmaking portfolio — films, photography, videography." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* Home-only overrides */
+    body { overflow: hidden; }   /* single-screen, no scroll */
+
+    /* subtle grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    #home-page { z-index: 1; }
+
+    #site-nav { background: transparent !important; border-bottom: none !important; }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ─────────────────────────────────── -->
+  <nav id="site-nav">
+    <a class="nav-name" id="nav-name-link" href="index.html">Your name</a>
+
+    <ul class="nav-links" id="nav-links">
+      <!-- rendered by nav.js -->
+    </ul>
+
+    <button class="nav-hamburger" id="hamburger-btn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Overlay -->
+  <div class="nav-mobile-overlay" id="mobile-overlay"></div>
+
+  <!-- ── Home: full-screen video ────────────────────── -->
+  <main id="home-page">
+    <div class="home-video-wrap" id="home-video-container">
+      <!-- Vimeo embed injected by render.js -->
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script src="data/config.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    renderNav();
+
+    /* ── Inject home video ── */
+    (function() {
+      const h = CONFIG.home;
+      const wrap = document.getElementById('home-video-container');
+      wrap.innerHTML = `
+        <div class="vimeo-wrapper">
+          <iframe
+            src="https://player.vimeo.com/video/${h.vimeoId}?autoplay=0&color=c8a96e&title=0&byline=0&portrait=0"
+            allow="autoplay; fullscreen; picture-in-picture; allowfullscreen"
+            title="${h.title}">
+          </iframe>
+        </div>
+        <p class="home-video-title">${h.subtitle}</p>
+      `;
+    })();
+
+    /* Update page title */
+    document.title = CONFIG.name;
+  </script>
+</body>
+</html>
