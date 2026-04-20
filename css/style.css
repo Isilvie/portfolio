@@ -454,7 +454,7 @@ p { line-height: 1.8; }
   gap: 40px;
  }
 .about-bio h2 {
-  font-size: 2rem;
+  font-size: 4rem;
   color: var(--white);
   margin-bottom: 24px;
 }
@@ -481,6 +481,7 @@ p { line-height: 1.8; }
     grid-template-columns: 1fr;
     gap: 40px;
   }
+}
   
   .about-portrait {
     position: static;
@@ -550,7 +551,7 @@ p { line-height: 1.8; }
 }
 
 .home-video-wrap {
-  width: 50%;
+  width: 35%;
   position: relative;
 }
 .home-video-wrap .vimeo-wrapper {
@@ -561,7 +562,7 @@ p { line-height: 1.8; }
   position: absolute;
   bottom: -44px;
   left: 0;
-  font-size: 0.68rem;
+  font-size: 1.2rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--text-dim);
@@ -593,6 +594,16 @@ footer {
 }
 
 /* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  #home-page { padding: 100px 20px; }
+  .home-video-wrap { width: 40%; }
+}
+
+@media (max-width: 768px) {
+  #home-page { padding: 80px 20px; }
+  .home-video-wrap { width: 60%; }
+}
+
 @media (max-width: 900px) {
   #site-nav { padding: 0 24px; }
 
@@ -633,7 +644,7 @@ footer {
 
 @media (max-width: 540px) {
   :root { --nav-h: 60px; }
-  .home-video-wrap { width: 96vw; }
+  .home-video-wrap { width: 85vw; }
   .photo-grid { columns: 1; }
   .page-content { padding-top: calc(var(--nav-h) + 24px); }
   .container { padding: 0 16px; }

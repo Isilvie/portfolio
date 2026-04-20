@@ -36,10 +36,10 @@ const CONFIG = {
     // Add as many objects as you need.
     // src: a direct URL to your image (or a relative path like "assets/photos/img1.jpg")
     { src: "photos/photo1.JPG", alt: "Clt skyline" },
-    { src: "photos/photo2.jpg", alt: "self-potrait" },
-    { src: "photos/photo6.jpg", alt: "S potrait" },
-    { src: "photos/photo4.jpg", alt: "vandy" },
-    { src: "photos/photo5.JPG", alt: "MKE" },
+    { src: "photos/photo2.jpg", alt: "Chicago" },
+    { src: "photos/photo6.jpg", alt: "MKE" },
+    { src: "photos/photo4.jpg", alt: "portrait" },
+    { src: "photos/photo5.JPG", alt: "Vandy" },
     { src: "photos/photo7.JPG", alt: "grad" }
    ],
 
