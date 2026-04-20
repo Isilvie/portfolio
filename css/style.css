@@ -86,7 +86,7 @@ p { line-height: 1.8; }
   display: flex;
   gap: 36px;
   list-style: none;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .nav-links a {
@@ -603,7 +603,7 @@ footer {
 @media (max-width: 1024px) {
   #home-page { padding: 100px 20px; }
   .home-video-wrap { width: 40%; }
-  .nav-name { font-size: 2.2rem; }
+  .nav-name { font-size: 2.2rem; margin-top: -5px; }
   .nav-links a { font-size: 1.4rem; }
   .nav-links { gap: 20px; }
 }
