@@ -63,7 +63,7 @@ const CONFIG = {
     portrait:  "photos/potrait.jpg",  // place your photo at assets/portrait.jpg
                                         // or replace with a URL
     bio: [
-      " is a filmmaker, photographer, and videographer. I’ve worked on short films and videos, and I plan to work on feature films and television series. My work is primarily autobiographical and comedic. Inspired by mockumentaries, sketch, and stand-up comedy I am   interested in blending documentary and narrative modes within projects. Themes present in my past work are failure, success, community, absurdity, banality, and the relationships and interplay between it all in contemporary life. My overall goal is to participate in evolving human culture to be more focused on love (doing for others and ourselves). I think unique and authentic characters in TV and film help us expand our perspective and love for the people in our lives. Success as an artist, for me, is moving my audience to positive action or positive thinking. I hope my work can help people understand themselves and others better."
+      " is a filmmaker, photographer, and videographer."
     ],
     // Contact details
     email:     "lubegakatte@gmail.com",
